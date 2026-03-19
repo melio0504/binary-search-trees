@@ -9,3 +9,8 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
   prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 };
+
+const randomArray = (length = 15, maxExclusive = 100) => (
+  Array.from({ length }, () => Math.floor(Math.random() * maxExclusive))
+);
+
