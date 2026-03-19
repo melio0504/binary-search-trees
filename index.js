@@ -20,3 +20,5 @@ const printTraversal = (tree, label, traversalMethod) => {
   console.log(`${label}:`, values.join(', '));
 };
 
+const initialValues = randomArray();
+const tree = new Tree(initialValues);
