@@ -22,7 +22,14 @@ export default class Tree {
   }
 
   includes(value) {
+    let current = this.root;
 
+    while (current) {
+      if (value === current.data) return true;
+      current = value < current.data ? current.left : current.right;
+    }
+
+    return false;
   }
 
   insert() {
