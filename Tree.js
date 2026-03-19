@@ -60,7 +60,32 @@ export default class Tree {
   }
 
   deleteItem(value) {
+    const removeNode = (node, target) => {
+      if (!node) return null;
 
+      if (target < node.data) {
+        node.left = removeNode(node.left, target);
+        return node;
+      }
+
+      if (target > node.data) {
+        node.right = removeNode(node.right, target);
+        return node;
+      }
+
+      if (!node.left && !node.right) return null;
+      if (!node.left) return node.right;
+      if (!node.right) return node.left;
+
+      let successor = node.right;
+      while (successor.left) successor = successor.left;
+
+      node.data = successor.data;
+      node.right = removeNode(node.right, successor.data);
+      return node;
+    };
+
+    this.root = removeNode(this.root, value);
   }
 
   levelOrderForEach(callback) {
