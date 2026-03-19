@@ -107,7 +107,18 @@ export default class Tree {
   }
 
   inOrderForEach(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('A callback function is required.');
+    }
 
+    const traverse = (node) => {
+      if (!node) return;
+      traverse(node.left);
+      callback(node.data);
+      traverse(node.right);
+    };
+
+    traverse(this.root);
   }
 
   preOrderForEach(callback) {
