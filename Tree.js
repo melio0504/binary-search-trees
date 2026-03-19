@@ -152,7 +152,22 @@ export default class Tree {
   }
 
   height(value) {
+    const findNode = (node, target) => {
+      if (!node) return null;
+      if (target === node.data) return node;
+      if (target < node.data) return findNode(node.left, target);
+      return findNode(node.right, target);
+    };
 
+    const getHeight = (node) => {
+      if (!node) return -1;
+      return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+    };
+
+    const targetNode = findNode(this.root, value);
+    if (!targetNode) return undefined;
+
+    return getHeight(targetNode);
   }
 
   depth(value) {
