@@ -171,7 +171,17 @@ export default class Tree {
   }
 
   depth(value) {
+    let current = this.root;
+    let currentDepth = 0;
 
+    while (current) {
+      if (value === current.data) return currentDepth;
+
+      current = value < current.data ? current.left : current.right;
+      currentDepth += 1;
+    }
+
+    return undefined;
   }
 
   isBalanced() {
