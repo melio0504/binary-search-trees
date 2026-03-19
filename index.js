@@ -14,3 +14,9 @@ const randomArray = (length = 15, maxExclusive = 100) => (
   Array.from({ length }, () => Math.floor(Math.random() * maxExclusive))
 );
 
+const printTraversal = (tree, label, traversalMethod) => {
+  const values = [];
+  traversalMethod.call(tree, (value) => values.push(value));
+  console.log(`${label}:`, values.join(', '));
+};
+
