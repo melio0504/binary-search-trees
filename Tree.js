@@ -137,7 +137,18 @@ export default class Tree {
   }
 
   postOrderForEach(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('A callback function is required.');
+    }
 
+    const traverse = (node) => {
+      if (!node) return;
+      traverse(node.left);
+      traverse(node.right);
+      callback(node.data);
+    };
+
+    traverse(this.root);
   }
 
   height(value) {
