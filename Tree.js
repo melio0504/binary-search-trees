@@ -6,7 +6,19 @@ export default class Tree {
   }
 
   buildTree(arr) {
+    const sortedUnique = [...new Set(arr)].sort((a, b) => a - b);
 
+    const build = (start, end) => {
+      if (start > end) return null;
+
+      const mid = Math.floor((start + end) / 2);
+      const node = new Node(sortedUnique[mid]);
+      node.left = build(start, mid - 1);
+      node.right = build(mid + 1, end);
+      return node;
+    };
+
+    return build(0, sortedUnique.length - 1);
   }
 
   includes(value) {
