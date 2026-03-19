@@ -32,8 +32,31 @@ export default class Tree {
     return false;
   }
 
-  insert() {
+  insert(value) {
+    if (!this.root) {
+      this.root = new Node(value);
+      return;
+    }
 
+    let current = this.root;
+
+    while (current) {
+      if (value === current.data) return;
+
+      if (value < current.data) {
+        if (!current.left) {
+          current.left = new Node(value);
+          return;
+        }
+        current = current.left;
+      } else {
+        if (!current.right) {
+          current.right = new Node(value);
+          return;
+        }
+        current = current.right;
+      }
+    }
   }
 
   deleteItem(value) {
