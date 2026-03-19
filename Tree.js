@@ -203,6 +203,16 @@ export default class Tree {
   }
 
   rebalance() {
+    const values = [];
 
+    const collectInOrder = (node) => {
+      if (!node) return;
+      collectInOrder(node.left);
+      values.push(node.data);
+      collectInOrder(node.right);
+    };
+
+    collectInOrder(this.root);
+    this.root = this.buildTree(values);
   }
 }
