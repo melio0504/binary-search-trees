@@ -185,7 +185,21 @@ export default class Tree {
   }
 
   isBalanced() {
+    const checkBalanced = (node) => {
+      if (!node) return 0;
 
+      const leftHeight = checkBalanced(node.left);
+      if (leftHeight === -1) return -1;
+
+      const rightHeight = checkBalanced(node.right);
+      if (rightHeight === -1) return -1;
+
+      if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+
+      return Math.max(leftHeight, rightHeight) + 1;
+    };
+
+    return checkBalanced(this.root) !== -1;
   }
 
   rebalance() {
